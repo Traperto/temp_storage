@@ -1,0 +1,10 @@
+import { Environment } from "./src/models/Environment";
+
+export const config: Environment = {
+    server: {
+        useHttps: false,
+        privateKey: '',
+        certificate: '',
+        port: 8080
+    }
+};
