@@ -6,5 +6,8 @@ export const config: Environment = {
         privateKey: '',
         certificate: '',
         port: 8080
+    },
+    sqlite: {
+        path: ''
     }
 };

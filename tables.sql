@@ -1,0 +1,5 @@
+CREATE TABLE `values` (
+    `temperature` REAL NOT NULL DEFAULT 0,
+    `humidity` REAL NOT NULL DEFAULT 0,
+    `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+)
