@@ -9,5 +9,8 @@ export const config: Environment = {
     },
     sqlite: {
         path: ''
+    },
+    jwt: {
+        secretOrPublicKey: ''
     }
 };

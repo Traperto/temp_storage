@@ -1,11 +1,13 @@
 import express = require('express');
 import {apiRouter} from './api/Routes';
-import * as serverFactory from './server/serverFactory';
+import {ServerFactory} from './server/ServerFactory';
+import { AuthController } from './api/AuthController';
 import { config } from './.environment';
 
 const app: express.Application = express();
-const server = serverFactory.createServerForApp(app);
+const server = ServerFactory.createServerForApp(app);
 
+app.use(AuthController.getAuthMiddleware());
 app.use(apiRouter);
 app.disable('x-powered-by');
 

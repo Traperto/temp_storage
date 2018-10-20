@@ -1,18 +1,18 @@
 import { databaseHandler } from "./DatabaseHandler";
 import { Record } from "../models/Record";
 
-class RecordMapper {
-    public async getAll(): Promise<Array<Record>> {
+export class RecordMapper {
+    public static async getAll(): Promise<Array<Record>> {
         const results = await databaseHandler.query('SELECT * FROM `values`');       
         return <Array<Record>>results;
     }
 
-    public async getAverage(): Promise<Record> {
+    public static async getAverage(): Promise<Record> {
         const result = await databaseHandler.query('SELECT AVG(`temperature`) as `temperature`, AVG(`humidity`) AS `humidity` FROM `values`');
         return <Record>result[0];
     }
 
-    public async add(record: Record): Promise<void> {
+    public static async add(record: Record): Promise<void> {
         if (!record.timestamp) {
             record.timestamp = (new Date()).toISOString();
         }
@@ -27,5 +27,3 @@ class RecordMapper {
         );
     }
 }
-
-export const recordMapper = new RecordMapper();

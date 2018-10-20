@@ -11,12 +11,11 @@ export class ApiController {
     public static async sendAsJson(dataProvider: Function, response: Response) {
         try {
             const data = await dataProvider();
-
-            return response.status(200).json(data);
+            response.status(200).json(data);
 
         } catch (error) {
             console.error(error);
-            return response.status(500).send('Internal Server Error');
+            response.status(500).send('Internal Server Error');
         }
     }
 
@@ -31,22 +30,24 @@ export class ApiController {
         try {
             if (validator() === false) {
                 // If validation fails -> 400
-                return response.status(400).send('Bad Request');
+                response.status(400).send('Bad Request');
+                return;
             }
 
             const data = await dataProvider();
             
             if (!data) {
                 // No data provided by dataProvider... Since no Error was thrown, creation should be successful -> 201
-                return response.status(201).send('Created');
+                response.status(201).send('Created');
+                return;
             }
 
             // Data provided and no Error -> 201 with given data
-            return response.status(201).json(data);
+            response.status(201).json(data);
 
         } catch (error) {
             console.error(error);
-            return response.status(500).send('Internal Server Error');
+            response.status(500).send('Internal Server Error');
         }
     }
 }
