@@ -17,4 +17,5 @@ class DbConfig {
 
 class JWTConfig {
     public secretOrPublicKey: string;
+    public options: Object;
 }

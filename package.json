@@ -1,6 +1,6 @@
 {
   "name": "temp_storage",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "A simple storage for temperature and humidity data which can be accessed via rest api",
   "main": "index.js",
   "scripts": {

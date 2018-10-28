@@ -22,7 +22,7 @@ export class AuthController {
 
             const token: string = authHeader.replace('Bearer', '').trim();
 
-            jsonwebtoken.verify(token, config.jwt.secretOrPublicKey, (error) => {
+            jsonwebtoken.verify(token, config.jwt.secretOrPublicKey, config.jwt.options, (error) => {
                 if (error) {
                     console.log(error);
                     response.status(401).send('Unauthorized');

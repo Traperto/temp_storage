@@ -11,6 +11,10 @@ export const config: Environment = {
         path: ''
     },
     jwt: {
-        secretOrPublicKey: ''
+        secretOrPublicKey: '',
+        options: {
+            algorithms: ["HS256", "HS384"]
+            /* see https://github.com/auth0/node-jsonwebtoken for validation options */
+        }
     }
 };

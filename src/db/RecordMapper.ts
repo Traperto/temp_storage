@@ -12,12 +12,12 @@ export class RecordMapper {
         return <Record>result[0];
     }
 
-    public static async add(record: Record): Promise<void> {
+    public static async add(record: Record): Promise<Array<Object>> {
         if (!record.timestamp) {
             record.timestamp = (new Date()).toISOString();
         }
 
-        databaseHandler.query(
+        return databaseHandler.query(
             'INSERT INTO `values` (`temperature`, `humidity`, `timestamp`) VALUES ($temperature, $humidity, $timestamp)', 
             {
                 $temperature: record.temperature,
