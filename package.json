@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "npm i && tsc",
+    "compile": "tsc",
     "start": "if [ ! -d \"dist\" ]; then npm run-script compile\n fi\n node dist/index.js",
     "dev": "tsc && npm run-script start"
   },
@@ -14,7 +14,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "jsonwebtoken": "^8.3.0",
-    "sqlite3": "^4.0.2",
+    "sqlite3": "^4.0.6",
     "typescript": "^3.1.3"
   },
   "devDependencies": {
