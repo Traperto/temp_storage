@@ -1,107 +1,114 @@
-swagger: "2.0"
+openapi: 3.0.1
 info:
-  description: "API-documentation for temp_storage"
-  version: "0.5.0"
-  title: "temp_storage"
+  title: temp_storage
+  description: API-documentation for temp_storage
   license:
-    name: "MIT"
-    url: "https://raw.githubusercontent.com/Traperto/temp_storage/master/LICENSE"
-host: "localhost:8080"
-basePath: "/"
-tags:
-- name: "Records"
-  description: ""
-schemes:
-- "http"
-securitySchemes:
-  xbearerAuth:
-    type: http
-    scheme: bearer
-    bearerFormat: JWT
+    name: MIT
+    url: https://raw.githubusercontent.com/Traperto/temp_storage/master/LICENSE
+  version: 0.6.2
+servers:
+- url: http://localhost:8080/
 security:
- - bearerAuth: []
+- bearerAuth: []
+tags:
+- name: Records
+  description: ""
 paths:
   /all:
     get:
-      
       tags:
-      - "Records"
-      summary: "Gets all stored records"
-      produces:
-      - "application/json"
+      - Records
+      summary: Gets all stored records
       responses:
         200:
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              type: "object"
-              properties:
-                temperature:
-                  type: "number"
-                  example: 23.3
-                humidity:
-                  type: "number"
-                  example: 42.1
-                timestamp:
-                  type: "string"
-                  example: "2018-05-04T23:24:15.000Z"
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    temperature:
+                      type: number
+                      example: 23.3
+                    humidity:
+                      type: number
+                      example: 42.1
+                    timestamp:
+                      type: string
+                      example: 2018-05-04T23:24:15.000Z
         401:
-          description: "Unauthorized"
+          description: Unauthorized
+          content: {}
         500:
-          description: "Internal Server Error"
+          description: Internal Server Error
+          content: {}
   /average:
     get:
       tags:
-       - "Records"
-      summary: "Gets average temperature and humidity"
+      - Records
+      summary: Gets average temperature and humidity
       responses:
         200:
-          description: "successful operation"
-          schema:
-            type: "object"
-            properties:
-              temperature:
-                type: "number"
-                example: 23.3
-              humidity:
-                type: "number"
-                example: 42.1
+          description: successful operation
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  temperature:
+                    type: number
+                    example: 23.3
+                  humidity:
+                    type: number
+                    example: 42.1
         401:
-          description: "Unauthorized"
+          description: Unauthorized
+          content: {}
         500:
-          description: "Internal Server Error"
+          description: Internal Server Error
+          content: {}
   /create:
     post:
       tags:
-      - "Records"
-      summary: "Creates a new record"
-      consumes:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Object containing the record-data"
+      - Records
+      summary: Creates a new record
+      requestBody:
+        description: Object containing the record-data
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                temperature:
+                  type: number
+                  example: 23.4
+                humidity:
+                  type: number
+                  example: 44.5
+                timetamp:
+                  type: string
+                  description: If not set, it will set current timestamp
+                  example: 2018-05-04T23:24:15.000Z
         required: true
-        schema:
-          type: "object"
-          properties:
-            temperature:
-              type: "number"
-              example: 23.4
-            humidity:
-              type: "number"
-              example: 44.5
-            timetamp:
-              type: "string"
-              example: "2018-05-04T23:24:15.000Z"
-              description: "If not set, it will set current timestamp"
       responses:
         201:
-          description: "Created"
+          description: Created
+          content: {}
         400:
-          description: "Bad Request due to invalid data"
+          description: Bad Request due to invalid data
+          content: {}
         401:
-          description: "Unauthorized"
-        500: 
-          description: "Internal Server Error"
+          description: Unauthorized
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      x-codegen-request-body-name: body
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
